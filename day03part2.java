@@ -1,56 +1,54 @@
 import java.io.File;
 import java.util.*;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Scanner;
 
 public class day03part2{
     public static void main(String[] args){
         int DIGITS = 12;
         try {
-            //***************** Oxygen ********/
+            //***************** Oxygen **************/
 
-            char toRemove = '-';
-            String removable = "";
+            char toKeep = '-';
             int result1;
             int result2;
-            List<String> numbers = new ArrayList<String>();
+
+            List<String> OXnumbers = new ArrayList<String>();
             List<String> CO2numbers = new ArrayList<String>();
             List<String> newnumbers = new ArrayList<String>();
+
             File input = new File("day03.txt");
             Scanner myReader = new Scanner(input);
+
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                numbers.add(data);
+                OXnumbers.add(data);
             }
 
-            CO2numbers = new ArrayList<String>(numbers);
+            CO2numbers = new ArrayList<String>(OXnumbers);
 
             for(int i=0; i<DIGITS;i++){
                 //Check the most common
                 float bitcounter = 0.0f;
-                for(int j=0; j<numbers.size();j++){
-                    if(Character.getNumericValue(numbers.get(j).charAt(i)) == 1){
+                for(int j=0; j<OXnumbers.size();j++){
+                    if(Character.getNumericValue(OXnumbers.get(j).charAt(i)) == 1){
                         bitcounter++;
                     }
                 }
 
-
-                //Remove useless
-                float mean = (float) numbers.size() / 2.0f;
+                //Filter numbers
+                float mean = (float) OXnumbers.size() / 2.0f;
                 if(bitcounter >= mean){
-                    toRemove = '1';
+                    toKeep = '1';
                 }else{
-                    toRemove = '0';
+                    toKeep = '0';
                 }
                 newnumbers.clear();
-                for(int h=0; h<numbers.size();h++){
-                    if(numbers.get(h).charAt(i) == toRemove){
-                        removable = numbers.get(h);
-                        newnumbers.add(removable);
+                for(int h=0; h<OXnumbers.size();h++){
+                    if(OXnumbers.get(h).charAt(i) == toKeep){
+                        newnumbers.add(OXnumbers.get(h));
                     }
                 }
-                numbers = new ArrayList<>(newnumbers);
+                OXnumbers = new ArrayList<>(newnumbers);
 
                 if(CO2numbers.size() == 1){
                     break;
@@ -58,12 +56,11 @@ public class day03part2{
             }
             
             myReader.close();
-            result1 = Integer.parseInt(numbers.get(0), 2);
+            result1 = Integer.parseInt(OXnumbers.get(0), 2);
             System.out.println("Oxygen: " + result1);
         
         //****************** C02 ************************/
-            char toKeep = '-';
-            removable = "";
+            toKeep = '-';
             newnumbers = new ArrayList<String>();
 
             for(int i=0; i<DIGITS;i++){
@@ -76,7 +73,7 @@ public class day03part2{
                 }
 
 
-                //Filter list
+                //Filter numbers
                 float mean = (float) CO2numbers.size() / 2.0f;
                 if(bitcounter >= mean){
                     toKeep = '0';
@@ -86,8 +83,7 @@ public class day03part2{
                 newnumbers.clear();
                 for(int h=0; h<CO2numbers.size();h++){
                     if(CO2numbers.get(h).charAt(i) == toKeep){
-                        removable = CO2numbers.get(h);
-                        newnumbers.add(removable);
+                        newnumbers.add(CO2numbers.get(h));
                     }
                 }
                 CO2numbers = new ArrayList<>(newnumbers);
