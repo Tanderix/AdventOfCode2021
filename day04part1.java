@@ -5,15 +5,12 @@ import java.io.FileNotFoundException;
 public class day04part1{
     public static void main(String[] args){
         try {
-            //***************** Oxygen **************/
 
             File input = new File("day04.txt");
             Scanner myReader = new Scanner(input);
+
             String[] drawn = myReader.nextLine().split(",");
             List<Integer> drawnList = new ArrayList<Integer>();
-            for(int i=0; i<drawn.length; i++){
-                drawnList.add(Integer.parseInt(drawn[i]));
-            }
             String[] row = new String[6];
             Integer[][] newboard = new Integer[6][6];
             List<Integer[][]> boards = new ArrayList<Integer[][]>();
@@ -22,6 +19,10 @@ public class day04part1{
             int timesWon = 0;
 
             //Input parsing
+            for(int i=0; i<drawn.length; i++){
+                drawnList.add(Integer.parseInt(drawn[i]));
+            }
+
             while (myReader.hasNextLine()) {    
                 //Empty Line
                 myReader.nextLine();
