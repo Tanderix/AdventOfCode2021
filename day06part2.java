@@ -25,7 +25,7 @@ public class day06part2{
             for(int k=0;k<fishes.size();k++){
                 System.out.print(fishes.get(k));
                 if(k<fishes.size()-1){
-                    System.out.print(", ");
+                    System.out.print(",");
                 }
             }
             System.out.println();
@@ -38,13 +38,6 @@ public class day06part2{
                 digits[10]++;
             }
 
-            for (int i = 0; i < digits.length; i++) {
-                System.out.print(digits[i]);
-            }
-            System.out.println(".");
-
-
-
             for(int i=0; i<256; i++){
                 aux = digits[0];
                 for (int j = 0; j < 9; j++) {
@@ -56,27 +49,12 @@ public class day06part2{
                 digits[10]+=aux;
 
                 System.out.println("Day " + (i+1) + ": " + digits[10]);
-                /*
-                for (int k = 0; k < digits.length; k++) {
-                    System.out.print(digits[k]);
-                }
-                */
-            System.out.println(".");
             }
 
-            System.out.println(".");
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-    }
-
-    public static int tot(int[] digits){
-        int num = 0;
-        for (int i = 0; i < digits.length; i++) {
-            num += digits[i];
-        }
-        return num;
     }
 }
