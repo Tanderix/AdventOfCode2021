@@ -10,14 +10,14 @@ public class day06part1{
             Scanner myReader = new Scanner(input);
 
             String[] line;
-            List<Integer> fishes = new ArrayList<Integer>();
-            int toAdd = 0;
+            List<Long> fishes = new ArrayList<Long>();
+            long aux = 0;
 
             //Parse input
             while(myReader.hasNextLine()){
                 line = myReader.nextLine().split(",");
                 for(int i=0;i<line.length;i++){
-                    fishes.add(Integer.parseInt(line[i]));
+                    fishes.add(Long.parseLong(line[i]));
                 }
             }
 
@@ -25,32 +25,32 @@ public class day06part1{
             for(int k=0;k<fishes.size();k++){
                 System.out.print(fishes.get(k));
                 if(k<fishes.size()-1){
-                    System.out.print(", ");
+                    System.out.print(",");
                 }
             }
             System.out.println();
 
-            //Days
-            for(int i=0; i<81; i++){
-                System.out.println("Day " + i + ": " + fishes.size());
-                //Reduce timer
-                for(int j=0; j<fishes.size();j++){
-                    int fish = fishes.get(j);
-                    if(fish-1 < 0){
-                        fishes.set(j, 6);
-                        toAdd++;
-                    }else{
-                        fishes.set(j, fish-1);
-                    }
-                }
-                if(i>0){
-                    for(int j=0; j<toAdd; j++){
-                        fishes.add(8);
-                    }
-                    toAdd = 0;
-                }
+            long[] digits = new long[11];
+            //Fill initial state
+            digits[10] = 0;
+            for(int i=0;i<fishes.size();i++){
+                digits[fishes.get(i).intValue()]++;
+                digits[10]++;
             }
-        
+
+            for(int i=0; i<80; i++){
+                aux = digits[0];
+                for (int j = 0; j < 9; j++) {
+                    digits[j] = digits[j+1];
+                }
+
+                digits[6]+=aux;
+                digits[8]+=aux;
+                digits[10]+=aux;
+
+                System.out.println("Day " + (i+1) + ": " + digits[10]);
+            }
+
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
