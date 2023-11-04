@@ -13,14 +13,12 @@ public class day09part2{
             String line;
             int[][] area = new int[ROWS][COLS];
             int i = 0;
-            int sum = 0;
             ArrayList<Integer> basins = new ArrayList<Integer>();
             
 
             //Parse input and fill matrix
             while(myReader.hasNextLine()){
                     line = myReader.nextLine();
-                    System.out.println(line);
                     for (int j = 0; j < COLS; j++) {
                         area[i][j] = Character.getNumericValue(line.charAt(j));
                     }
@@ -31,8 +29,6 @@ public class day09part2{
             for (int r = 0; r < ROWS; r++) {
                 for (int c = 0; c < COLS; c++) {
                     if(checkAdjacents(area, r, c)){
-                        System.out.println("r: " + r + ", c: " + c + ", " + area[r][c]);
-                        //Check basins
                         basins.add(checkBasins(area, r, c));
                     }
                 }
